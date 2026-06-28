@@ -1,37 +1,25 @@
-class Product  { 
-    private double buyingPrice;
-    private double sellingPrice;
-
-    public  double getBuyingPrice() {
-        return buyingPrice;
-    }
-
-    public double getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setBuyingPrice(double buyingPrice){
-        this.buyingPrice=buyingPrice;
-    
-    }
-    public void setSellingPrice(double sellingPrice){
-        this.sellingPrice = sellingPrice;
-    }
-
-     public double calculateProfit(){
-        return sellingPrice - buyingPrice;
-        
-    }    
+interface calculator{
+    int divide(int a, int b)throws ArithmeticException;
 }
 
-public class main{
-    public static void main(String[] args){
-        Product p=new Product();
-        p.setBuyingPrice(100.00);
-        p.setSellingPrice(300.00);
-        System.out.println("Buying Price is"+p.getBuyingPrice());
-        System.out.println("Selling Price is"+p.getSellingPrice());
-        System.out.println("Profit is"+p.calculateProfit());
+class simpleCalculator implements calculator{
+   @Override
+   public int divide(int a, int b) throws ArithmeticException {
+        if(b==0)
+            throw new ArithmeticException("Division by zero is not allowed.");
+        return a/b;
     }
 }
-        
+
+public class main {
+    public static void main(String[]args){
+        calculator calc = new simpleCalculator();
+        try {
+            int result = calc.divide(10, 2);
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        System.out.println("Program continues after exception handling.");
+    }
+}
