@@ -1,48 +1,61 @@
-class Person{
-    String name;
-    int id;
+ class Animal{
+    private String name;
+    private int age;
 
-    Person(String name,int id){
+    public Animal(String name, int age) {
         this.name = name;
-        this.id = id;
+        this.age=age;
     }
+    public String getName() { return name; }
+    public int getAge() { return age;}
 
-    void register(){
-        System.out.println("Person" + name +"with ID" + id + "is registered.");
+    public void makeSound() {
+        System.out.println("The animal make a sound");
+
+    }
+ } 
+class Dog extends Animal{
+    private String breed;
+
+    public Dog(String name, int age, String breed){
+        super(name, age);
+        this.breed = breed;
+    } 
+    public String getBreed() { return breed; }
+
+    @Override
+    public void makeSound() {
+        System.out.println("The dog barks");
     }
 }
 
-class Teacher extends Person{
-    float salary;
-    Teacher(String name, int id, float salary){
-        super(name,id);
-        this.salary=salary;
-    }
+class Cat extends Animal{
+    private boolean isIndoor;
 
-@Override
-    void register(){
-        System.out.println("Teacher" + name +"with ID" + id + "is registered with salary💵💵" + salary);
-    }
-}class Student extends Person{
-    String grade;
-    Student(String name, int id, String grade){
-        super(name,id);
-        this.grade=grade;
-    }
+    public Cat(String name, int age, boolean isIndoor){
+        super(name, age);
+        this.isIndoor = isIndoor;
+    } 
+    public boolean isIndoor() { return isIndoor; }
 
-@Override
-    void register(){
-        System.out.println("Student" + name +"with ID" + id + "is registered with grade💯" + grade);
-
+    @Override
+    public void makeSound() {
+        System.out.println("The cat meows");
     }
 }
+
 public class Main {
     public static void main(String[] args) {
-        Person p1 = new Student() ("John", 1, "B");
-        Person p2 = new Teacher ("Alice", 2, 50000.0f);
+         Dog d  = new Dog("Buddy", 3, "Golden Retriever");
+         Cat c  = new Cat("Whiskers", 2, true);
 
-        p1.register();
-        p2.register();
+        System.out.println(d.getName() + " is a " + d.getBreed() + " and is " + d.getAge() + " years old.");
+        d.makeSound();
 
+        System.out.println(c.getName() + " is an indoor cat: " + c.isIndoor() + " and is " + c.getAge() + " years old.");
+        c.makeSound();
     }
 }
+
+
+
