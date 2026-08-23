@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class Main2  {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -11,11 +11,9 @@ public class Main {
         
     }
     public static void printDecreasing(int n){
-        if (n == 0)return;
-        System.out.println(n);
-
-        printDecreasing(n-1);
-
+       for (int i = n; i > 0; i--) {
+            System.out.println(i);
+        }
 
     }
 }
