@@ -1,26 +1,42 @@
-import java.util.*;
+import java.util.Scanner;
+
 public class Main {
-    public static void Display(int[] arr,int index){
-        if (index == arr.length) {
-            return;
+    void sort(int arr[]) {
+        int n = arr.length;
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
         }
-        System.out.println(arr[index]);
-        Display(arr, index + 1);
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the size of the array:");
-        int n = sc.nextInt();
-
-        int[] arr = new int[n];
-        System.out.println("Enter" + n + " elements");
+    static void printArray(int arr[]) {
+        int n = arr.length;
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            System.out.print(arr[i] + " ");
         }
-        System.out.print(" Array elements: ");
-        Display(arr, 0);
-        sc.close();
+        System.out.println();
     }
-    
+
+    public static void main (String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("enter the number of elements:");
+        int n=sc.nextInt();
+        int arr[]=new int[n];
+
+        System.out.println("enter the elements:");
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        Main ob=new Main();
+        ob.sort(arr);   
+
+        System.out.println("sorted array:");
+        ob.printArray(arr);
+    }
 }
