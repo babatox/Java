@@ -1,42 +1,70 @@
 import java.util.Scanner;
 
-public class Main {
-    void sort(int arr[]) {
-        int n = arr.length;
-        for (int i = 1; i < n; i++) {
-            int key = arr[i];
-            int j = i - 1;
+public class Main{
+    private static int[] computerLPSArray(String pattern){
+        int m=pattern.length();
+        int lps[]=new int[m];
+        int len=0;
+        int i=1;
 
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j--;
+        while(i<m){
+            if(pattern.charAt(i)==pattern.charAt(len)){
+                len++;
+                lps[i]=len;
+                i++;
             }
-            arr[j + 1] = key;
+            else{
+                if(len!=0){
+                    len=lps[len-1];
+                }
+                else{
+                    lps[i]=0;
+                    i++;
+                }
+            }
         }
+    
+    return lps;
     }
 
-    static void printArray(int arr[]) {
-        int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            System.out.print(arr[i] + " ");
+    public static void KMPsearch(String text, String pattern){
+        int n=text.length();
+        int m=pattern.length();
+        int lps[]=computerLPSArray(pattern);
+        int i=0;
+        int j=0;
+
+        boolean found=false;
+
+        while(i<n){
+            if(pattern.charAt(j)==text.charAt(i)){
+                i++;
+                j++;
+                }
+            if(j==m){
+                System.out.println("Pattern found at index: "+(i-j));
+                found=true;
+                j=lps[j-1];
+            }else if(i<n && pattern.charAt(j)!=text.charAt(i)){
+                if(j!=0){
+                    j=lps[j-1];
+                }else{
+                    i++;
+                }
+            }
         }
-        System.out.println();
-    }
-
-    public static void main (String[]args){
-        Scanner sc=new Scanner(System.in);
-        System.out.println("enter the number of elements:");
-        int n=sc.nextInt();
-        int arr[]=new int[n];
-
-        System.out.println("enter the elements:");
-        for(int i=0;i<n;i++){
-            arr[i]=sc.nextInt();
+        if(!found){
+            System.out.println("Pattern not found");
+            }
         }
-        Main ob=new Main();
-        ob.sort(arr);   
+        public static void main(String args[]){
+            Scanner sc=new Scanner(System.in);
+            System.out.println("Enter the text: ");
+            String text=sc.nextLine();
 
-        System.out.println("sorted array:");
-        ob.printArray(arr);
+            System.out.println("Enter the pattern: ");
+            String pattern=sc.nextLine();
+            KMPsearch(text, pattern);
+            sc.close();
+        }
     }
-}
